@@ -1,0 +1,4 @@
+version: 1
+display_name: Video URL Transcriber
+short_description: URL to timestamped transcript JSON
+default_prompt: Transcribe this media URL and return timestamped JSON segments with metadata.

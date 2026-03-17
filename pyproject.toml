@@ -1,0 +1,18 @@
+[project]
+name = "universal-video-transcriber"
+version = "0.1.0"
+description = "Platform-agnostic URL-to-transcript service for agents"
+requires-python = ">=3.10"
+dependencies = [
+  "fastapi>=0.115.0",
+  "uvicorn>=0.30.0",
+  "pydantic>=2.7.0",
+  "orjson>=3.10.0",
+  "yt-dlp>=2026.1.0",
+  "faster-whisper>=1.1.0",
+  "python-multipart>=0.0.9",
+]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"

@@ -6,6 +6,18 @@ import json
 import shutil
 import subprocess
 import sys
+from pathlib import Path
+
+
+def _inject_repo_root() -> None:
+    here = Path(__file__).resolve()
+    for parent in [here.parent, *here.parents]:
+        if (parent / "app" / "pipeline.py").exists():
+            sys.path.insert(0, str(parent))
+            return
+
+
+_inject_repo_root()
 
 
 def check_dependency(cmd: str) -> bool:
@@ -18,6 +30,13 @@ def run_doctor() -> int:
         ("ffmpeg", check_dependency("ffmpeg")),
         ("yt-dlp", check_dependency("yt-dlp")),
     ]
+    if not checks[2][1]:
+        try:
+            import yt_dlp  # noqa: F401
+
+            checks[2] = ("yt-dlp", True)
+        except Exception:
+            pass
     for name, ok in checks:
         print(f"{'OK ' if ok else 'MISS'} {name}")
 
